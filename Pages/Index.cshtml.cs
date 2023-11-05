@@ -1,10 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
+﻿using System.Drawing;
 using System.IO;
 using Console;
 using ImageProcessingWeb.Managers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,6 +13,7 @@ namespace ImageProcessingWeb.Pages
         private GaussFilterManager _gaussFilterManager = new();
         private HistogramManager _histogramManager = new();
         private HueRotationManager _hueRotationManager = new();
+        private BicubicUpscaleManager _bicubicUpscaleManager = new();
 
         public void OnGet() { }
 
@@ -32,10 +30,12 @@ namespace ImageProcessingWeb.Pages
                 "gauss" => _gaussFilterManager.ApplyFilter(result.Source, sigma),
                 "equalize" => _histogramManager.NormalizeHistogram(result.Source),
                 "rotate" => _hueRotationManager.Rotate(result.Source, degree),
+                "bicubic" => _bicubicUpscaleManager.Upscale(result.Source),
                 _ => result.Source
             };
             result.OutputHistogram = _histogramManager.GenerateHistogramImage(result.Output);
             result.Stringify();
+            result.ShowHistogram = action == "equalize";
             return Partial("_Result", result);
         }
     }

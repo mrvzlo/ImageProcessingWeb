@@ -12,6 +12,8 @@ namespace ImageProcessingWeb
         public Bitmap Output;
         public Bitmap OutputHistogram;
 
+        public bool ShowHistogram = false;
+
         public string SourceStr;
         public string SourceHistogramStr;
         public string OutputStr;
