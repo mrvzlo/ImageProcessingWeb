@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using ImageProcessingWeb.Models;
 
 namespace ImageProcessingWeb.Managers
 {
@@ -21,25 +22,19 @@ namespace ImageProcessingWeb.Managers
             var oy = y / upscale;
             var dx = x % upscale;
             var dy = y % upscale;
-            var red = BicubicInterpolationChannel(source, ox, oy, dx, dy, c => c.R);
-            var green = BicubicInterpolationChannel(source, ox, oy, dx, dy, c => c.G);
-            var blue = BicubicInterpolationChannel(source, ox, oy, dx, dy, c => c.B);
-
-            red = Math.Max(0, Math.Min(255, red));
-            green = Math.Max(0, Math.Min(255, green));
-            blue = Math.Max(0, Math.Min(255, blue));
-
-            return Color.FromArgb((int)red, (int)green, (int)blue);
+            var code = BicubicInterpolationChannel(source, ox, oy, dx, dy, c => new RGB(c));
+            return code.ToColor();
         }
 
-        private double BicubicInterpolationChannel(Bitmap image, int x, int y, int dx, int dy, Func<Color, int> channelSelector)
+        private RGB BicubicInterpolationChannel(Bitmap image, int x, int y, int dx, int dy, Func<Color, RGB> channelSelector)
         {
-            var sum = 0d;
+            var sum = new RGB();
             var totalWeight = 0d;
 
             for (var i = -1; i <= 2; i++)
                 for (var j = -1; j <= 2; j++)
                 {
+
                     var neighborX = (x + i) % image.Width;
                     var neighborY = (y + j) % image.Height;
                     if (neighborX < 0) neighborX += image.Width;
@@ -53,7 +48,7 @@ namespace ImageProcessingWeb.Managers
                     totalWeight += weight;
                 }
 
-            return totalWeight == 0 ? 0 : sum / totalWeight;
+            return totalWeight == 0 ? new RGB() : sum / totalWeight;
         }
         private double BicubicKernel(double x)
         {

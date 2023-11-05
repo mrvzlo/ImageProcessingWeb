@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using ImageProcessingWeb.Models;
 
 namespace Console
 {
@@ -24,7 +25,7 @@ namespace Console
         {
             var width = image.Width;
             var height = image.Height;
-            double r = 0, g = 0, b = 0;
+            var color = new RGB();
             for (var dx = -sigma; dx <= sigma; dx++)
                 for (var dy = -sigma; dy <= sigma; dy++)
                 {
@@ -35,12 +36,10 @@ namespace Console
 
                     var neighborPixel = image.GetPixel(neighborX, neighborY);
                     var weight = kernel[dx + sigma, dy + sigma];
-                    r += neighborPixel.R * weight;
-                    g += neighborPixel.G * weight;
-                    b += neighborPixel.B * weight;
+                    color += new RGB(neighborPixel) * weight;
                 }
 
-            return Color.FromArgb((int)r, (int)g, (int)b);
+            return color.ToColor();
         }
 
         private double[,] CreateKernel(int sigma)
