@@ -1,6 +1,6 @@
 ﻿@model Images
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px; text-align: center">
+<div class="d-flex gap-2 flex-wrap text-center">
     <div>
         <h3>Source image</h3>
         <img src="data:image/jpeg;base64, @Model.SourceStr">
@@ -9,8 +9,7 @@
     {
         <div>
             <h3>Source histogram</h3>
-            <img src="data:image/jpeg;base64, @Model.SourceHistogramStr"
-                 width="100" height="100" style="margin: auto; border: solid">
+            <img src="data:image/jpeg;base64, @Model.SourceHistogramStr" class="m-auto border" width="100" height="100">
         </div>
     }
     <div>
@@ -21,8 +20,7 @@
     {
         <div>
             <h3>Output histogram</h3>
-            <img src="data:image/jpeg;base64, @Model.OutputHistogramStr"
-                 width="100" height="100" style="margin: auto; border: solid">
+            <img src="data:image/jpeg;base64, @Model.OutputHistogramStr" class="m-auto border" width="100" height="100">
         </div>
     }
 </div>

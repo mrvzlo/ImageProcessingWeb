@@ -16,6 +16,7 @@ namespace ImageProcessingWeb.Pages
         private BicubicUpscaleManager _bicubicUpscaleManager = new();
         private HaarNoiseReductionManager _haarNoiseReductionManager = new();
         private HoughTransformationManager _houghTransformationManager = new();
+        private CompressionManager _compressionManager = new();
 
         public void OnGet() { }
 
@@ -26,6 +27,13 @@ namespace ImageProcessingWeb.Pages
             using var memoryStream = new MemoryStream();
             imageFile.CopyTo(memoryStream);
             var result = new Images {Source = new Bitmap(memoryStream)};
+
+            if (action == "compress")
+            {
+                var compressionResult = _compressionManager.Compress(result.Source);
+                return Partial("_CompressionResult", compressionResult);
+            }
+
             result.SourceHistogram = _histogramManager.GenerateHistogramImage(result.Source);
             result.Output = action switch
             {

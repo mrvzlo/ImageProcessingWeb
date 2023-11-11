@@ -1,0 +1,17 @@
+﻿@model CompressionResult
+
+<div class="d-flex gap-2 flex-wrap text-center">
+    <div>
+        <h3>Source</h3>
+        <img src="data:image/jpeg;base64, @Model.SourceStr">
+    </div>
+    <div>
+        <h3>Decompressed</h3>
+        <img src="data:image/jpeg;base64, @Model.ResultStr">
+    </div>
+</div>
+<h6>@Html.Raw(Model.Result.Replace("\n", "<br>"))</h6>
+<div class="mt-3 mb-1">
+    <div>Compressed string</div>
+    <textarea class="form-control">@Html.Raw(Model.Compressed)</textarea>
+</div>

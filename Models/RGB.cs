@@ -27,36 +27,17 @@ namespace ImageProcessingWeb.Models
 
         public Color ToColor() => Color.FromArgb(ToByte(R), ToByte(G), ToByte(B));
 
+        public override string ToString() => $"{ToChar(R)}{ToChar(G)}{ToChar(B)}";
+
         private byte ToByte(double x) => (byte)Math.Max(0, Math.Min(byte.MaxValue, x));
-
-        public static RGB operator +(RGB code, double x)
-        {
-            code.R += x;
-            code.G += x;
-            code.B += x;
-            return code;
-        }
-
-        public static RGB operator +(RGB a, RGB b) => new() {R = a.R + b.R, G = a.G + b.G, B = a.B + b.B};
-
-        public static RGB operator -(RGB a, RGB b) => new() { R = a.R - b.R, G = a.G - b.G, B = a.B - b.B };
-
+        private char ToChar(double x) => Convert.ToChar(ToByte(x));
+        
+        public static RGB operator +(RGB a, RGB b) => new(a.R + b.R, a.G + b.G, a.B + b.B);
+        public static RGB operator +(RGB a, double x) => new(a.R + x, a.G + x, a.B + x);
+        public static RGB operator -(RGB a, RGB b) => new(a.R - b.R, a.G - b.G, a.B - b.B);
         public static RGB operator -(RGB code, double x) => code + -x;
-
-        public static RGB operator *(RGB code, double x)
-        {
-            code.R *= x;
-            code.G *= x;
-            code.B *= x;
-            return code;
-        }
-
-        public static RGB operator /(RGB code, double x)
-        {
-            code.R /= x;
-            code.G /= x;
-            code.B /= x;
-            return code;
-        }
+        public static RGB operator *(RGB code, double x) => new(code.R * x, code.G * x, code.B * x);
+        public static RGB operator /(RGB code, double x) => new(code.R / x, code.G / x, code.B / x);
+        public RGB Div(int x) => new(Math.Floor(R / x), Math.Floor(G / x), Math.Floor(B / x));
     }
 }

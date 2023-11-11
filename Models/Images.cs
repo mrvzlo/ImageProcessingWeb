@@ -27,7 +27,7 @@ namespace ImageProcessingWeb
             OutputHistogramStr = BitmapToString(OutputHistogram);
         }
 
-        private string BitmapToString(Bitmap bitmap)
+        public static string BitmapToString(Bitmap bitmap)
         {
             if (bitmap == null) return "";
             using var ms = new MemoryStream();

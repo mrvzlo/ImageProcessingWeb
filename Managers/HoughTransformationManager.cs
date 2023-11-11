@@ -24,7 +24,7 @@ namespace ImageProcessingWeb.Managers
                 {
                     var cx = x - width / 2; // -w/2 ... w/2
                     var cy = y - height / 2; // -h/2 ... h/2
-                    if (pixels[x + y * width].GetBrightness() > 0.5) continue;
+                    if (pixels[x + y * width].GetBrightness() > 0.2) continue;
                     for (var degree = 0; degree < maxDegree; degree++)
                     {  
                         // -d/2 ... d/2 
