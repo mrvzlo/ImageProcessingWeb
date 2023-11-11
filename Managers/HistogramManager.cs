@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using ImageProcessingWeb.Managers;
 
-namespace Console
+namespace ImageProcessingWeb.Managers
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
     public class HistogramManager
     {
         private const int Size = 1000;

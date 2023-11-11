@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
-using Console;
 using ImageProcessingWeb.Managers;
+using ImageProcessingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -39,6 +39,7 @@ namespace ImageProcessingWeb.Pages
             {
                 "gauss" => _gaussFilterManager.ApplyFilter(result.Source, sigma),
                 "equalize" => _histogramManager.NormalizeHistogram(result.Source),
+                "fourier" => _fourierFilterManager.ApplyFilter(result.Source),
                 "rotate" => _hueRotationManager.Rotate(result.Source, degree),
                 "bicubic" => _bicubicUpscaleManager.Upscale(result.Source),
                 "denoise" => _haarNoiseReductionManager.Denoise(result.Source, threshold),

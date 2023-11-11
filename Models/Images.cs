@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace ImageProcessingWeb
+namespace ImageProcessingWeb.Models
 {
     public class Images
     {

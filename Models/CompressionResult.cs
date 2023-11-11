@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ImageProcessingWeb.Pages
+namespace ImageProcessingWeb.Models
 {
     public class CompressionResult
     {

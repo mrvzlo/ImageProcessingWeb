@@ -2,9 +2,8 @@
 using System.Drawing;
 using ImageProcessingWeb.Models;
 
-namespace Console
+namespace ImageProcessingWeb.Managers
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
     public class GaussFilterManager
     {
         public Bitmap ApplyFilter(Bitmap source, int sigma)
