@@ -39,12 +39,12 @@ namespace ImageProcessingWeb.Managers
 
         private RGB[] TransformHaarMatrixInverse(RGB[] pixels, int width, int height)
         {
+            pixels = Transpose(pixels, width, height);
             for (var i = 0; i < width; i++)
                 TransformHaarArrayInverse(pixels, i * height, height);
             pixels = Transpose(pixels, height, width);
             for (var i = 0; i < height; i++)
                 TransformHaarArrayInverse(pixels, i * width, width);
-            pixels = Transpose(pixels, width, height);
             return pixels;
         }
 
